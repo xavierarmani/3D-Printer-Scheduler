@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<div class="showInfo">
+
+  <p>
+    <strong>Username:</strong>
+    <%= @user.userName %>
+  </p>
+  
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+  
+  <p>
+    <strong>Password:</strong>
+    <%= @user.password %>
+  </p>
+  
+  <p>
+    <strong>Approval:</strong>
+    <%= @user.approval %>
+  </p>
+  
+  <p>
+    <strong>Admin Status:</strong>
+    <%= @user.admin %>
+  </p>
+</div>
+
+<div class="btn-group btn-lg">
+  <%= link_to 'Edit', edit_user_path(@user), class: "text-center btn btn-lg btn-danger" %>
+  <%= link_to 'Back', users_path, class: "text-center btn btn-lg btn-danger" %>
+</div>

@@ -1,0 +1,89 @@
+<!--This form is for adding new machines to the machine-DB-->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+</style>
+
+<%= form_for(@machine) do |f| %>
+  <% if @machine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@machine.errors.count, "error") %> prohibited this admin from being saved:</h2>
+
+      <ul>
+      <% @machine.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form">
+    <!-- The newly created machine will be added to the machine database-->
+    <!-- This will allow the user to select it when making a new reservation-->
+    <h1>Add New Machine</h1>
+      <div id="new_machine" style="display: block;">
+          
+        <div class="field-wrap">
+          <label for="machine_machineID">Machine Name<span class="req">*</span></label>
+          <input type="text" name="machine[machineID]" id="machine_machineID"
+            required autocomplete="off">
+        </div>
+        
+        <div class="field-wrap">
+          <label for="machine_machineDescription">Machine Type<span class="req">*</span></label>
+          <input type="text" name="machine[machineDescription]" id="machine_machineDescription"
+            required autocomplete="off">
+        </div>
+        
+        <div class="field-wrap">
+          <label for="machine_materialUsed">Material Used<span class="req">*</span></label>
+          <input type="text" name="machine[materialUsed]" id="machine_materialUsed"
+            required autocomplete="off">
+        </div>
+        
+        <button type="submit" class="button button-block" name="commit" value="Create Machine"/>
+            Add New Machine
+        </button>
+          
+        <a href="/machines">
+            <button type="button" class="button button-small">Back</button>
+        </a>
+        
+      </div> <!--/new_machine-->
+    </form>
+  </div> <!--/form-->
+
+<!--Javascript-->
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script>$('.form').find('input, textarea').on('keyup blur focus', function (e) {
+  
+  var $this = $(this),
+      label = $this.prev('label');
+
+	  if (e.type === 'keyup') {
+			if ($this.val() === '') {
+          label.removeClass('active highlight');
+        } else {
+          label.addClass('active highlight');
+        }
+    } else if (e.type === 'blur') {
+    	if( $this.val() === '' ) {
+    		label.removeClass('active highlight'); 
+			} else {
+		    label.removeClass('highlight');   
+			}   
+    } else if (e.type === 'focus') {
+      
+      if( $this.val() === '' ) {
+    		label.removeClass('highlight'); 
+			} 
+      else if( $this.val() !== '' ) {
+		    label.addClass('highlight');
+			}
+    }
+
+});
+
+</script>
+<% end %>

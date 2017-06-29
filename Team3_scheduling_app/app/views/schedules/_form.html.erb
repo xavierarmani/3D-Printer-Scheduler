@@ -1,0 +1,102 @@
+<!--This page is used to create a new reservations-->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+</style>
+  
+<%= form_for(@schedule) do |f| %>
+
+<div class="form">
+  <h1>Create a Reservation</h1>
+  
+  <div class="field-wrap">
+    <label class="active" for="schedule_machineID">Machine </label>
+    <!-- when a new machine is added to the system, it will be added to the list of machines users can chose from -->
+    <%= f.select(:machineID, Machine.all.pluck(:machineID)) %>
+  </div>
+  
+  <div class="field-wrap">
+    <label class="active" for="schedule_userName">Username</label>
+    <input type="text" name="schedule[userName]" id="schedule_userName" 
+    required autocomplete="off"/>
+  </div>
+  
+  <div class="field-wrap">
+      <div class='input-group date' id='datetimepicker6'>
+        <label class="active" for="schedule_startTime">Please select starting date and time</label>
+        <input type='text' class="form-control" name="schedule[startTime]"
+        id= "schedule_startTime" placeholder="Select start time"/>
+        
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+  </div>
+
+  <div class="field-wrap">
+      <div class='input-group date' id='datetimepicker7'>
+        <label class="active" for="schedule_endTime">Please select same date with an end time</label>
+        <input type='text' class="form-control" name="schedule[endTime]"
+        id= "schedule_endTime" placeholder="Select end time"/>
+        
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+  </div>
+
+  <button type="submit" class="button button-block" name="commit"/>
+      Reserve Time
+  </button>
+      
+  <!--Error messages-->
+  <% if @schedule.errors.any? %>
+      <div class="animated shake" id="error_explanation">
+        <h2><%= pluralize(@schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
+  
+        <ul>
+        <% @schedule.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+  <a href="/schedules">
+      <button type="button" class="button button-small">Back</button>
+  </a>
+      
+    </div> <!--/signup-->
+  </form>
+</div> <!--/form-->
+  
+  <!--Javascript and options set for bootstrap dateTimepicker-->
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker6').datetimepicker({
+      sideBySide: true,
+      useCurrent: true,
+      showClear: true,
+      format:'MMM DD, YYYY h:mmaZ',
+      stepping: 30
+    });
+    $('#datetimepicker7').datetimepicker({
+      sideBySide: true,
+      useCurrent: false, //Important! See issue #107
+      showClear: true,
+      format:'MMM DD, YYYY h:mmaZ',
+      stepping: 30
+        
+    });
+    $("#datetimepicker6").on("dp.change", function (e) {
+        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        
+    });
+    $("#datetimepicker7").on("dp.change", function (e) {
+        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+    });
+  });
+</script>
+<% end %>

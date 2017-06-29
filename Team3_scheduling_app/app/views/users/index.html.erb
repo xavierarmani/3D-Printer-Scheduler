@@ -1,0 +1,39 @@
+<!--This is the Administrator Tools page for approving new users and adding new 
+machines. Once an admin logs in this the page they will see-->
+
+<h1 class= "title"><b>Listing Users</b></h1>
+
+<div class="btn-group btn-group-justified">
+    <%= link_to 'New User', new_user_path, class: "btn btn-lg btn-danger" %>
+    <%= link_to 'Show Machines', machines_path, class: "text-center btn btn-lg btn-danger" %>
+    <%= link_to 'Show Schedule List', schedules_list_path, class: "btn btn-lg btn-danger" %>
+    <%= link_to 'Log Out', root_path, class: "text-center btn btn-lg btn-danger" %>
+</div>
+
+<table class="adminTable">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Approval</th>
+      <th>Administrator</th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.userName %></td>
+        <td><%= user.email %></td>
+        <td><%= user.password %></td>
+        <td><%= user.approval %></td>
+        <td><%= user.admin %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

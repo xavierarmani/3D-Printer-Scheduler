@@ -1,0 +1,33 @@
+<!--This page loads in the new reservation page and refreshes the page once-->
+<body onLoad="LoadOnce">
+
+<%= render 'form' %>
+
+<!-- app/views/users/new.html.erb -->
+
+<!--
+<h1>Signup!</h1>
+
+<%= form_for :schedule, url: '/schedules' do |f| %>
+
+
+<% end %>
+-->
+</body>
+<script type='text/javascript'>
+
+(function()
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem( 'firstLoad' ) )
+    {
+      localStorage[ 'firstLoad' ] = true;
+      window.location.reload();
+    }  
+    else
+      localStorage.removeItem( 'firstLoad' );
+  }
+})();
+
+</script>

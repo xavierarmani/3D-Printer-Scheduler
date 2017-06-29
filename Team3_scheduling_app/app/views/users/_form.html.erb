@@ -1,0 +1,105 @@
+<!--This page is used to edit user infomation.-->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+</style>
+
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="form">
+    <h1>Editing User</h1>
+    
+    <div class="field-wrap">
+      <%= f.label :userName, :class => 'active' %>
+      <%= f.text_field :userName %>
+    </div>
+    
+    <div class="field-wrap">
+      <%= f.label :email, :class => 'active' %>
+      <%= f.text_field :email %>
+    </div>
+    
+    <div class="field-wrap">
+      <%= f.label :password, :class => 'active' %>
+      <%= f.text_field :password %>
+    </div>
+    
+    <div class="field-wrap">
+      <%= f.label :approval, :class => 'active' %>
+      <!--false/true switch used to determine whether or not the user is allowed to make a reservation -->
+      <!--By default, when a new user is created, the switch is false -->
+      <!--users must wait for the admin to set approval to true in order to log in and make a reservation -->
+      <%= f.select :approval, ['false','true'] %>
+    </div>
+    
+    <div class="field-wrap">
+      <%= f.label :admin, :class => 'active' %>
+      <!--false/true switch used to determine whether or not the user has admin privileges -->
+      <%= f.select :admin, ['false','true'] %>
+    </div>
+    
+    <button type="submit" class="button button-block" name="commit"/>
+        Submit
+    </button>
+        
+  </div> <!--/form-->
+  
+  <!--Javascript-->
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script>$('.form').find('input, textarea').on('keyup blur focus', function (e) {
+  
+  var $this = $(this),
+      label = $this.prev('label');
+
+	  if (e.type === 'keyup') {
+			if ($this.val() === '') {
+          label.removeClass('active highlight');
+        } else {
+          label.addClass('active highlight');
+        }
+    } else if (e.type === 'blur') {
+    	if( $this.val() === '' ) {
+    		label.removeClass('active highlight'); 
+			} else {
+		    label.removeClass('highlight');   
+			}   
+    } else if (e.type === 'focus') {
+      
+      if( $this.val() === '' ) {
+    		label.removeClass('highlight'); 
+			} 
+      else if( $this.val() !== '' ) {
+		    label.addClass('highlight');
+			}
+    }
+
+});
+
+$('.tab a').on('click', function (e) {
+  
+  e.preventDefault();
+  
+  $(this).parent().addClass('active');
+  $(this).parent().siblings().removeClass('active');
+  
+  target = $(this).attr('href');
+
+  $('.tab-content > div').not(target).hide();
+  
+  $(target).fadeIn(600);
+  
+});</script>
+<% end %>

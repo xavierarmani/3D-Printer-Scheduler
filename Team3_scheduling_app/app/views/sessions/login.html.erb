@@ -1,0 +1,89 @@
+<!--This is the login page if the page is refreashed or a login error occured-->
+<!DOCTYPE html>
+<html >
+regular login
+<head>
+  <meta charset="UTF-8">
+  <title>Sign-Up/Login Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+  </style>
+  
+</head>
+  <div class="form">
+    <ul class="tab-group">
+      <li class="tab"><a href="/users/new">Sign Up</a></li>
+      <li class="tab active"><a href="#login">Log In</a></li>
+    </ul>
+    
+    <div class="tab-content">
+        
+      <div id="login" style="display: block";>
+        <h1>Welcome Back!</h1>
+        <%= form_tag "/login", :sessions => :login_attempt do %>
+        
+          
+          <div class="field-wrap">
+            <label for="username_or_email">Username or Email<span class="req">*</span></label>
+            <input type="text" name="username_or_email" id="username_or_email"
+              required autocomplete="off">
+          </div>
+          
+          <div class="field-wrap">
+            <label for="login_password">Password<span class="req">*</span></label>
+            <input type="password" name="login_password" id="login_password"
+              required autocomplete="off">
+          </div>
+          
+          <button type="submit" class="button button-block" name="commit" value="Log In"/>
+            Log In
+          </button>
+          
+          <a href="/">
+              <button type="button" class="button button-small">Back</button>
+          </a>
+          
+          <% if flash[:notice] %>
+            <div class="animated notice bounceInDown"><%= flash[:notice] %></div>
+          <% end %>
+          
+        <% end %>
+          
+        
+      </div>
+    </div> <!--/tab-content-->
+  </div> <!--/form-->
+  
+  <!--Javascript-->
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script>$('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+var $this = $(this),
+    label = $this.prev('label');
+
+  if (e.type === 'keyup') {
+		if ($this.val() === '') {
+        label.removeClass('active highlight');
+      } else {
+        label.addClass('active highlight');
+      }
+  } else if (e.type === 'blur') {
+  	if( $this.val() === '' ) {
+  		label.removeClass('active highlight'); 
+		} else {
+	    label.removeClass('highlight');   
+		}   
+  } else if (e.type === 'focus') {
+    
+    if( $this.val() === '' ) {
+  		label.removeClass('highlight'); 
+		} 
+    else if( $this.val() !== '' ) {
+	    label.addClass('highlight');
+		}
+  }
+
+});
+</script>

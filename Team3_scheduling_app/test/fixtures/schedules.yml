@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  timeBlock: 2017-04-29 21:31:17
+  open: MyString
+  reserved: MyString
+
+two:
+  timeBlock: 2017-04-29 21:31:17
+  open: MyString
+  reserved: MyString

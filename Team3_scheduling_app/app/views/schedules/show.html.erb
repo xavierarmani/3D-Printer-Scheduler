@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Machine:</strong>
+  <%= @schedule.machine %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @schedule.machine_type %>
+</p>
+
+<p>
+  <strong>Time Block:</strong>
+  <%= @schedule.timeBlock %>
+</p>
+
+<p>
+  <strong>Reserved:</strong>
+  <%= @schedule.reserved %>
+</p>
+
+<%= link_to 'Edit', edit_schedule_path(@schedule) %> |
+<%= link_to 'Back', schedules_path %>

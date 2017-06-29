@@ -1,0 +1,32 @@
+<!--<p id="notice"><%= notice %></p>-->
+
+<h1>Schedules List</h1>
+<div class="btn-lg">
+    <%= link_to 'Back', users_path, class: "text-center btn btn-lg btn-danger" %>
+</div>
+
+<table class="adminTable">
+  <thead>
+    <tr>
+      <th>Machine</th>
+      <th>User</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @schedules.each do |sched| %>
+      <tr>
+        <td><%= sched.machineID %></td>
+        <td><%= sched.userName %></td>
+        <td><%= sched.startTime %></td>
+        <td><%= sched.endTime %></td>
+        <td><%= link_to 'Destroy', sched, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
